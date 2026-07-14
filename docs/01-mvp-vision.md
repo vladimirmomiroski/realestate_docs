@@ -1,180 +1,590 @@
 # MVP Vision
 
-## Product Idea
+## Product Vision
 
-Build a real estate discovery platform for North Macedonia.
+Build a modern real estate discovery and management platform for North Macedonia.
 
-The platform helps users find properties through search, filters, and map exploration.
+The platform should help buyers and renters find suitable properties quickly, understand listing value more clearly, and compare options through structured data such as price per square meter.
 
-The goal is not just to show listings, but to help users understand property value better through clean information, price per square meter, and basic comparison tools.
+It should also give private sellers, agents, and agencies a practical way to create, publish, and manage listings.
 
-## Primary User
+The long-term goal is broader than a basic listings website, but the MVP should remain focused on useful discovery, reliable listing data, and clear workflows.
 
-A buyer or renter looking for property in North Macedonia.
+## Market
 
-## Secondary User
+Initial market:
 
-A registered seller, agent, or agency that wants to publish property listings.
+```text
+North Macedonia
+```
 
-## Main Discovery Paths
+The platform should support the whole country, while Skopje will likely contain the largest number of listings and may be the default map starting location.
 
-### 1. Search and Filter Path
+## Product Principles
 
-The user can search and filter listings by:
+The product should prioritize:
 
-* city
-* area
-* property type
-* sale or rent
-* price range
-* size range
-* rooms
+```text
+speed
+clarity
+usability
+accurate information
+simple workflows
+strong search
+mobile-friendly design
+```
 
-After filtering, the app shows listings closest to the search criteria.
+Visual design should be modern and recognizable, but never at the expense of performance or ease of use.
 
-The user can open a specific listing and view full property details.
+## Primary Users
 
-### 2. Map Exploration Path
+### Buyer or Renter
 
-The user can open a map view.
+A person looking for a property to buy or rent.
 
-The map can start around Skopje as the default starting point, but the app must support all North Macedonia.
+They need:
 
-The user can:
+- fast search and filtering
+- clear listing information
+- map exploration
+- price per square meter
+- useful comparison information
+- simple contact options
 
-* zoom in
-* zoom out
-* move around the map
-* see property markers
-* click a marker
-* open the listing details page
+### Private Seller
 
-## Listing Details Page
+A registered user who wants to create and manage personal property listings.
 
-Each listing page should show:
+They need:
 
-* images
-* title
-* price
-* size
-* price per square meter
-* city
-* area
-* address or approximate location
-* map location
-* property type
-* sale or rent
-* rooms
-* bathrooms
-* floor
-* description
-* contact information
-* basic comparison section
+- draft listing creation
+- image management
+- publishing controls
+- personal listing dashboard
+- profile and contact information
 
-## MVP Smart Feature
+### Agent or Agency
 
-The first smart feature is price per square meter.
+A professional or company managing multiple listings and team members.
+
+They need:
+
+- agency profile
+- agency-owned listings
+- member invitations
+- Owner and Agent permissions
+- listing management
+- logo and branding
+- private agency dashboard
+- basic agency summary information
+
+### Platform Administrator
+
+A trusted platform user responsible for basic agency verification.
+
+They need:
+
+- agency approval
+- agency rejection
+- agency disabling
+
+Advanced moderation tools are not part of the current MVP.
+
+## Core Product Experience
+
+The MVP should support four connected experiences:
+
+```text
+public property discovery
+personal listing management
+agency listing management
+basic platform administration
+```
+
+## 1. Public Property Discovery
+
+Visitors should be able to browse listings without creating an account.
+
+### Search and Filters
+
+Users should be able to search and filter by useful property criteria, including:
+
+- city
+- municipality
+- neighborhood
+- listing type: sale or rent
+- property type: apartment or house
+- price range
+- property size
+- rooms
+- heating type
+- furnishing status
+- property condition
+- basement
+- elevator
+- apartment type
+- house type
+- yard size
+
+Search should remain fast and understandable.
+
+Chapter 10 will deepen search behavior, sorting, location handling, and query performance.
+
+### Listing Results
+
+Search results should show compact listing cards with:
+
+- primary image
+- title
+- price
+- size
+- price per square meter
+- location
+- property type
+- sale or rent
+- important property details
+
+### Map Exploration
+
+The frontend MVP should include a map view.
+
+Users should be able to:
+
+- zoom in and out
+- move around the map
+- see listing markers
+- open a marker preview
+- open the full listing page
+
+The backend already stores latitude and longitude. More advanced map search behavior can be added only when the frontend proves it is needed.
+
+### Listing Details
+
+A listing page should show:
+
+- images
+- translated title
+- translated description
+- price
+- currency
+- area
+- price per square meter
+- city
+- municipality
+- neighborhood
+- address or approximate location
+- map location
+- property type
+- sale or rent
+- rooms
+- bathrooms
+- apartment or house-specific details
+- heating
+- furnishing
+- condition
+- parking
+- basement
+- balcony information
+- seller or agency contact details
+
+Only Active listings should be publicly visible.
+
+Draft and Archived listings should remain private.
+
+## 2. Personal Listing Management
+
+Authenticated users should be able to create and manage personal listings.
+
+### Listing Lifecycle
+
+New listings start as:
+
+```text
+Draft
+```
+
+An eligible user can:
+
+- create a Draft listing
+- upload and order images
+- choose a primary image
+- publish a listing
+- unpublish a listing
+- archive a listing
+- view their own listings
+
+Public visibility is controlled by listing status:
+
+```text
+Draft    -> private
+Active   -> public
+Archived -> private
+```
+
+### User Status
+
+Current rules:
+
+```text
+PendingVerification users can prepare Draft listings.
+Active users can publish personal listings.
+Disabled users cannot create listings or change listing status.
+```
+
+### Listing Limit
+
+The current backend rule limits creation to three listings per `CreatedByUserId`.
+
+Agency listings currently count against the individual creator as well.
+
+This rule is not considered a final long-term product decision and will be reviewed during Chapter 11.
+
+## 3. Agency Management
+
+Agencies are part of the expanded MVP.
+
+### Agency Profile
+
+An agency can have:
+
+- name
+- slug
+- description
+- contact information
+- address
+- city
+- municipality
+- logo
+- verification status
+
+New agencies begin as:
+
+```text
+PendingVerification
+```
+
+### Agency Roles
+
+Current agency roles:
+
+```text
+Owner
+Manager
+Agent
+```
+
+Current MVP behavior:
+
+```text
+Owner -> agency administration
+Agent -> agency listing work
+Manager -> intentionally restricted until its real product role is defined
+```
+
+### Agency Invitations
+
+Active agency Owners can:
+
+- create invitations
+- invite Owner or Agent roles
+- list invitations
+- cancel invitations
+
+Invited users can accept through a secure invitation token.
+
+Email delivery is not part of the current MVP. It will be added later with notifications or background jobs.
+
+### Agency Member Management
+
+Active Owners can:
+
+- disable another member
+- promote an Agent to Owner
+- demote an Owner to Agent when another Active Owner remains
+- recover an existing Manager by changing the role to Owner or Agent
+
+An agency must not lose its final Active Owner through normal role changes.
+
+### Agency-Owned Listings
+
+Active Owner and Agent members can:
+
+- create agency-owned Draft listings
+- view agency dashboard listings
+- publish agency listings when the agency is Active
+- unpublish or archive agency listings when allowed
+
+Private agency management remains available even when the agency is PendingVerification, Disabled, or Rejected.
+
+### Agency Dashboard
+
+The agency dashboard should provide:
+
+- private agency listings
+- status filtering
+- total listing count
+- Draft listing count
+- Active listing count
+- Archived listing count
+- total member count
+- Active member count
+- actionable Pending invitation count
+
+Advanced analytics are not part of the current MVP.
+
+## 4. Basic Platform Administration
+
+The MVP includes only a small agency-verification workflow.
+
+An Active platform Admin can:
+
+- approve an agency
+- reject an agency
+- disable an agency
+
+Platform Admin is separate from agency Owner.
+
+Changing agency status does not automatically archive or unpublish existing listings.
+
+Advanced moderation, verification documents, notes, reports, and audit interfaces are postponed.
+
+## Multilingual Content
+
+User-created public listing content is stored through listing translations.
+
+Translated listing fields include:
+
+- title
+- description
+- address
+- city
+- municipality
+- neighborhood
+
+Fixed application labels such as statuses, roles, property types, and button text should be localized by the frontend.
+
+Agency profile translations are not part of the current MVP and can be added later if real frontend needs justify them.
+
+## Smart and Comparison Features
+
+### Price Per Square Meter
+
+The first smart comparison feature is:
+
+```text
+Price per square meter
+```
 
 Example:
 
-```txt
+```text
 Apartment
-71m²
+71 m²
 €95,000
 €1,338/m²
 ```
 
-This helps users compare listings without needing AI in the first version.
+This gives immediate value without requiring AI.
 
-## Basic Comparison MVP
+### Similar Listings
 
-The listing page can show similar listings based on:
+The frontend MVP may show similar listings based on:
 
-* same city
-* same area
-* similar price
-* similar size
-* same property type
+- same city
+- same municipality or neighborhood
+- same property type
+- similar price
+- similar size
+- same listing type
 
-Advanced AI comparison is not part of the first MVP.
+The exact matching logic belongs to the Search and Discovery chapter.
 
-## Seller Upload Rule
+### Future Intelligence
 
-Visitors cannot upload listings.
+Later versions may include:
 
-Only registered users with seller/agent access can create listings.
+- comparable-property analysis
+- area price averages
+- price-change history
+- estimated property value
+- document analysis
+- personalized recommendations
+- AI-assisted listing creation
 
-The MVP direction is:
+These are not required for the first frontend launch.
 
-* registered sellers can create listing drafts
-* sellers can publish up to 3 listings for free
-* publishing may require admin approval
-* payment/subscription comes later
+## Current Implementation State
+
+The backend is complete through Chapter 9.
+
+Implemented backend areas include:
+
+```text
+authentication and users
+user profile and avatar
+personal listings
+agency-owned listings
+listing translations
+listing images
+search and filtering
+publishing and visibility
+agencies and members
+agency invitations
+member management
+agency logo management
+platform-admin agency verification
+agency dashboard listings
+agency dashboard summary
+```
+
+Current backend verification:
+
+```text
+416/416 tests passing
+```
+
+The next backend chapters are:
+
+```text
+Chapter 10 — Search and Discovery Phase 2
+Chapter 11 — Data Integrity and Targeted Hardening
+Chapter 12 — API Consistency, Observability, and Frontend Readiness
+```
+
+Frontend development begins after those chapters.
 
 ## MVP Includes
 
-### Public Side
+### Public Experience
 
-* homepage
-* search/filter area
-* listing results
-* map view
-* property markers
-* listing details page
-* price per square meter
-* basic comparison section
-* contact information
+- homepage
+- listing search
+- filters
+- sorting
+- listing cards
+- listing details
+- map exploration
+- property markers
+- price per square meter
+- basic comparison or similar listings
+- seller or agency contact information
 
-### Backend Side
+### Registered User Experience
 
-* listing domain model
-* PostgreSQL database
-* listing API
-* filtering API
-* map listing data
-* listing details API
-* basic similar listings logic
-* pagination
-* validation
+- register
+- login
+- personal profile
+- avatar
+- create Draft listing
+- listing image management
+- personal listing dashboard
+- publish
+- unpublish
+- archive
 
-### Frontend Side
+### Agency Experience
 
-* homepage
-* search/filter UI
-* listings page
-* map page
-* listing cards
-* map markers
-* marker preview
-* listing details page
-* comparison section
+- create agency
+- public agency profile
+- agency logo
+- agency-owned listings
+- invitations
+- token acceptance
+- member disabling
+- role changes
+- private listing dashboard
+- basic dashboard summary
 
-## Not MVP
+### Administration
 
-Do not build these yet:
+- approve agency
+- reject agency
+- disable agency
 
-* AI price estimation
-* payment system
-* subscriptions
-* chat
-* mobile app
-* advanced CRM
-* analytics dashboard
-* saved searches
-* favorites
-* complex map drawing
-* heatmaps
-* advanced recommendation engine
+## Not Part of the Current MVP
+
+Do not add these before they are justified by the product:
+
+- payments
+- subscriptions
+- agency plans
+- listing boosts
+- live chat
+- mobile application
+- advanced CRM
+- client notes
+- advanced analytics dashboards
+- heatmaps
+- complex polygon map drawing
+- full recommendation engine
+- AI price estimation
+- automated valuation
+- refresh tokens
+- password reset
+- email verification
+- invitation email delivery
+- notification system
+- public agent profiles
+- agency activity feed
+- listing assignment workflows
+- verification documents
+- full moderation system
+
+Some of these may be added after frontend development reveals real priorities.
 
 ## MVP Success Criteria
 
 The MVP is successful when:
 
-* listings can be created
-* listings are saved in PostgreSQL
-* listings appear in search results
-* listings appear on the map
-* users can filter listings
-* users can open listing details
-* users can see price per square meter
-* users can see basic similar listings
+### Discovery
+
+- users can find listings through search and filters
+- users can browse listings on a map
+- public users see only Active listings
+- listing details are complete and understandable
+- price per square meter is clearly visible
+- similar listings or basic comparisons are useful
+
+### Sellers
+
+- registered users can create and manage Draft listings
+- users can upload and organize listing images
+- eligible users can publish, unpublish, and archive listings
+- personal listings are manageable through a dashboard
+
+### Agencies
+
+- agencies can create and manage agency-owned listings
+- Owners can invite and manage members
+- Agents can perform listing work
+- agency branding and public profiles are usable
+- agency verification works
+- the dashboard provides useful basic counts
+
+### Quality
+
+- frontend and backend contracts are consistent
+- important authorization rules are tested
+- search remains fast enough for realistic usage
+- the platform works well on desktop and mobile
+- the product is simple enough for real users to understand without instructions
+
+## Long-Term Direction
+
+The long-term platform may expand into:
+
+- stronger property intelligence
+- market analytics
+- saved searches
+- favorites
+- notifications
+- agent workspaces
+- agency collaboration
+- listing assignment
+- document analysis
+- AI-assisted workflows
+- subscription plans
+- paid visibility tools
+- CRM features
+
+These features should be introduced only when the core listing, discovery, and management experience is stable.
